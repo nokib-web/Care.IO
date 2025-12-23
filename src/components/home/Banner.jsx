@@ -5,14 +5,14 @@ const Banner = () => {
     return (
         <div className="hero min-h-[80vh]  p-10">
             <div className="hero-content flex-col lg:flex-row-reverse ">
-              
+
                 {/* Image Side */}
                 <div className="lg:w-1/2 flex gap-2">
 
                     {/* Large Image (Left) */}
                     <div className="flex-1">
                         <Image
-                            src="https://i.ibb.co.com/kVK4BWM0/Baby-Sitting.jpg"
+                            src="https://i.ibb.co/kVK4BWM0/Baby-Sitting.jpg"
                             className="w-full h-full object-cover rounded-3xl shadow-2xl border-8 border-white"
                             alt="Professional Caregiving"
                             width={600}
@@ -23,7 +23,7 @@ const Banner = () => {
                     {/* Right Side Small Images */}
                     <div className="flex flex-col gap-4 w-1/2">
                         <Image
-                            src="https://i.ibb.co.com/hFw5B98L/care-sick.jpg"
+                            src="https://i.ibb.co/hFw5B98L/care-sick.jpg"
                             className="w-full h-full object-cover rounded-3xl shadow-2xl border-8 border-white"
                             alt="Professional Caregiving"
                             width={300}
@@ -31,7 +31,7 @@ const Banner = () => {
                         />
 
                         <Image
-                            src="https://i.ibb.co.com/WNWh1pmB/old-man-care.jpg"
+                            src="https://i.ibb.co/WNWh1pmB/old-man-care.jpg"
                             className="w-full h-full object-cover rounded-3xl shadow-2xl border-8 border-white"
                             alt="Professional Caregiving"
                             width={300}
