@@ -21,9 +21,9 @@ const Banner = () => {
                         transition={{ duration: 0.8 }}
                     >
                         <Image
-                            src="https://images.unsplash.com/photo-1628172828599-56338e9e1bb8?q=80&w=1200&auto=format&fit=crop"
+                            src="https://i.ibb.co.com/kVK4BWM0/Baby-Sitting.jpg"
                             className="object-cover rounded-[1.5rem] md:rounded-[2rem] shadow-2xl border-4 border-white"
-                            alt="Care.IO Professional Caregiving"
+                            alt="Care.IO Male Caregiver with Child"
                             fill
                             priority
                             sizes="(max-width: 768px) 60vw, 40vw"
@@ -39,9 +39,9 @@ const Banner = () => {
                             transition={{ duration: 0.8, delay: 0.2 }}
                         >
                             <Image
-                                src="https://images.unsplash.com/photo-1584515933487-9bfa05dcc445?q=80&w=600&auto=format&fit=crop"
+                                src="https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?q=80&w=600&auto=format&fit=crop"
                                 className="object-cover rounded-[1.5rem] md:rounded-[2rem] shadow-2xl border-4 border-white"
-                                alt="Care.IO Sick Care"
+                                alt="Care.IO Sick Patient Care"
                                 fill
                                 sizes="(max-width: 768px) 30vw, 20vw"
                             />
