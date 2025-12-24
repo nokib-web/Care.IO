@@ -23,7 +23,7 @@ const Banner = () => {
                         <Image
                             src="https://images.unsplash.com/photo-1628172828599-56338e9e1bb8?q=80&w=1200&auto=format&fit=crop"
                             className="object-cover rounded-[1.5rem] md:rounded-[2rem] shadow-2xl border-4 border-white"
-                            alt="Professional Caregiving"
+                            alt="Care.IO Professional Caregiving"
                             fill
                             priority
                             sizes="(max-width: 768px) 60vw, 40vw"
@@ -41,7 +41,7 @@ const Banner = () => {
                             <Image
                                 src="https://images.unsplash.com/photo-1584515933487-9bfa05dcc445?q=80&w=600&auto=format&fit=crop"
                                 className="object-cover rounded-[1.5rem] md:rounded-[2rem] shadow-2xl border-4 border-white"
-                                alt="Sick Care"
+                                alt="Care.IO Sick Care"
                                 fill
                                 sizes="(max-width: 768px) 30vw, 20vw"
                             />
