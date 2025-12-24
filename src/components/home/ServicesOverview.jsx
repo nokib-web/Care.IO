@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -28,7 +30,7 @@ const ServicesOverview = () => {
     ];
 
     return (
-        <section className="py-20 bg-base-100">
+        <section className="py-12 bg-base-100">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-neutral">Our Core Services</h2>
@@ -39,16 +41,19 @@ const ServicesOverview = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {services.map((service) => (
-                        <div key={service.id} className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 border border-base-200">
-                            <figure className="relative h-64 w-full">
+                        <div key={service.id} className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 border border-base-200 overflow-hidden">
+                            {/* Fixed: Added min-h-[250px] to ensure the container never collapses on mobile */}
+                            <figure className="relative h-64 min-h-[250px] w-full">
                                 <Image
                                     src={service.image}
                                     alt={service.title}
                                     fill
+                                    sizes="(max-width: 768px) 100vw, 33vw"
                                     className="object-cover transition-transform duration-500 hover:scale-105"
+                                    priority={service.id === 1} // Prioritize first image for LCP
                                 />
                             </figure>
-                            <div className="card-body items-center text-center">
+                            <div className="card-body items-center text-center p-6">
                                 <h3 className="card-title text-2xl mb-2">{service.title}</h3>
                                 <p className="text-gray-600 mb-6">{service.description}</p>
                                 <div className="card-actions">
