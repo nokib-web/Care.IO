@@ -6,30 +6,30 @@ import { motion } from 'framer-motion';
 
 const Banner = () => {
     return (
-        <div className="hero min-h-[80vh] p-10 bg-base-100">
+        <div className="w-full min-h-[50vh] p-10 bg-base-100">
             <div className="hero-content flex-col lg:flex-row-reverse gap-10">
 
                 {/* --- Image Side --- */}
-                <div className="lg:w-1/2 flex gap-4 h-[500px]">
+                <div className="lg:w-1/2 flex gap-4 h-[400px] lg:h-[550px]">
                     {/* Large Image (Left) */}
                     <motion.div
-                        className="flex-1 relative"
+                        className="flex-[2] relative"
                         initial={{ opacity: 0, x: 50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
                     >
                         <Image
-                            src="https://i.ibb.co/kVK4BWM0/Baby-Sitting.jpg"
-                            className="w-full h-full object-cover rounded-3xl shadow-2xl border-[6px] border-white"
+                            src="https://i.ibb.co.com/kVK4BWM0/Baby-Sitting.jpg"
+                            className="w-full h-full object-cover rounded-[2rem] shadow-2xl border-4 border-white"
                             alt="Professional Caregiving - Baby Sitting"
                             fill
-                            sizes="(max-width: 768px) 100vw, 33vw"
+                            sizes="(max-width: 768px) 66vw, 33vw"
                             priority
                         />
                     </motion.div>
 
                     {/* Right Side Small Images Column */}
-                    <div className="flex flex-col gap-4 w-1/2">
+                    <div className="flex flex-col gap-4 flex-1">
                         <motion.div
                             className="flex-1 relative"
                             initial={{ opacity: 0, y: -30 }}
@@ -37,11 +37,11 @@ const Banner = () => {
                             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                         >
                             <Image
-                                src="https://i.ibb.co/hFw5B98L/care-sick.jpg"
-                                className="w-full h-full object-cover rounded-3xl shadow-2xl border-[6px] border-white"
+                                src="https://i.ibb.co.com/hFw5B98L/care-sick.jpg"
+                                className="w-full h-full object-cover rounded-[2rem] shadow-2xl border-4 border-white"
                                 alt="Sick Care"
                                 fill
-                                sizes="(max-width: 768px) 100vw, 25vw"
+                                sizes="(max-width: 768px) 33vw, 16vw"
                             />
                         </motion.div>
 
@@ -52,11 +52,11 @@ const Banner = () => {
                             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
                         >
                             <Image
-                                src="https://i.ibb.co/WNWh1pmB/old-man-care.jpg"
-                                className="w-full h-full object-cover rounded-3xl shadow-2xl border-[6px] border-white"
+                                src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=600&auto=format&fit=crop"
+                                className="w-full h-full object-cover rounded-[2rem] shadow-2xl border-4 border-white"
                                 alt="Elderly Care"
                                 fill
-                                sizes="(max-width: 768px) 100vw, 25vw"
+                                sizes="(max-width: 768px) 33vw, 16vw"
                             />
                         </motion.div>
                     </div>
