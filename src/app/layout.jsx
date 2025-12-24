@@ -16,13 +16,36 @@ const poppins = Poppins({
 
 
 export const metadata = {
-  title: "Care.IO",
-  description: "Baby Sitting & Elderly Care Service Platform",
+  title: {
+    default: "Care.IO | Trusted Care Services",
+    template: "%s | Care.IO"
+  },
+  description: "Professional Baby Sitting, Elderly Care, and Patient Support Services. Book trusted caregivers online instantly.",
+  keywords: ["care services", "baby sitting", "elderly care", "sick care", "patient support", "home care", "care.io"],
+  authors: [{ name: "Care.IO Team" }],
+  creator: "Care.IO",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: process.env.NEXTAUTH_URL || "https://care.io",
+    title: "Care.IO | Your Trusted Care Partner",
+    description: "Find and book professional caregivers for your loved ones. Reliable baby sitting, elderly care, and patient services.",
+    siteName: "Care.IO",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Care.IO | Professional Care Services",
+    description: "Book trusted caregivers for baby, elderly, and patient care.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${poppins.className} antialiased`}
       >
