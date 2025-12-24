@@ -4,7 +4,7 @@ import Link from "next/link";
 const ServiceCard = ({ service }) => {
   if (!service) return null;
 
-  const { title, image, description, price, slug } = service;
+  const { title, image, description, price, id } = service;
 
   return (
     <div className="card bg-base-100 shadow-xl border border-gray-100 transition-all duration-300 hover:scale-105 hover:shadow-2xl group">
@@ -17,11 +17,11 @@ const ServiceCard = ({ service }) => {
             unoptimized={true}
             className="rounded-xl object-cover transition-transform duration-500 group-hover:scale-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+          <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent"></div>
         </div>
       </figure>
       <div className="card-body">
-        <h2 className="card-title text-primary font-bold">{title || "Untitled Service"}</h2>
+        <h2 className="card-title  font-bold">{title || "Untitled Service"}</h2>
         <p className="text-gray-600 line-clamp-2 text-sm">{description || "No description available."}</p>
         <div className="card-actions justify-between items-center mt-4">
           <span className="text-xl font-bold text-secondary">

@@ -2,11 +2,13 @@ import React from 'react';
 import Logo from './Logo';
 import NavLink from '../buttons/NavLink';
 import Link from 'next/link';
-import { getSession, logoutUser } from '@/actions/server/auth';
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import SignOutButton from '../buttons/SignOutButton';
 
 const Navbar = async () => {
     try {
-        const session = await getSession();
+        const session = await getServerSession(authOptions);
 
         const navLinks = (
             <>
@@ -15,7 +17,7 @@ const Navbar = async () => {
                 <li><NavLink href="/about">About</NavLink></li>
                 <li><NavLink href="/contact">Contact</NavLink></li>
                 {session && (
-                    <li><NavLink href="/my-bookings">My Bookings</NavLink></li>
+                    <li><NavLink href="/dashboard">Dashboard</NavLink></li>
                 )}
             </>
         );
@@ -45,17 +47,17 @@ const Navbar = async () => {
                         <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar placeholder">
                                 <div className="bg-neutral text-neutral-content rounded-full w-10">
-                                    <span className="text-xl">{session.name?.charAt(0).toUpperCase() || "U"}</span>
+                                    <span className="text-xl">{session.user?.name?.charAt(0).toUpperCase() || "U"}</span>
                                 </div>
                             </div>
                             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                                <li><div className="font-bold">{session.name}</div></li>
-                                <li><NavLink href="/my-bookings">My Bookings</NavLink></li>
-                                <li><NavLink href="/admin/dashboard">Admin Dashboard</NavLink></li>
+                                <li><div className="font-bold">{session.user?.name}</div></li>
+                                <li><NavLink href="/dashboard">Dashboard</NavLink></li>
+                                {session.user?.role === 'admin' && (
+                                    <li><NavLink href="/admin/dashboard">Admin Panel</NavLink></li>
+                                )}
                                 <li className="text-error">
-                                    <form action={logoutUser}>
-                                        <button type="submit" className="w-full text-left">Logout</button>
-                                    </form>
+                                    <SignOutButton />
                                 </li>
                             </ul>
                         </div>

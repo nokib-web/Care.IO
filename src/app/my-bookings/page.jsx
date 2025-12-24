@@ -1,5 +1,6 @@
 import { getUserBookings } from "@/actions/server/bookings";
 import Link from "next/link";
+import CancelBookingButton from "@/components/buttons/CancelBookingButton";
 
 const MyBookingsPage = async () => {
     const bookings = await getUserBookings();
@@ -25,6 +26,7 @@ const MyBookingsPage = async () => {
                                 <th>Location</th>
                                 <th>Cost</th>
                                 <th>Status</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,8 +39,9 @@ const MyBookingsPage = async () => {
                                         {new Date(booking.bookingDate).toLocaleDateString()}
                                     </td>
                                     <td>
-                                        <div>{booking.location.division}, {booking.location.district}</div>
-                                        <div className="text-sm opacity-50">{booking.location.address}</div>
+                                        <div>{booking.location.area}, {booking.location.city}</div>
+                                        <div className="text-xs opacity-70">{booking.location.district}, {booking.location.division}</div>
+                                        <div className="text-sm opacity-50 mt-1">{booking.location.address}</div>
                                     </td>
                                     <td>
                                         <div className="font-semibold">${booking.totalCost}</div>
@@ -48,9 +51,19 @@ const MyBookingsPage = async () => {
                                     </td>
                                     <td>
                                         <div className={`badge ${booking.status === 'Pending' ? 'badge-warning' :
-                                                booking.status === 'Confirmed' ? 'badge-success' : 'badge-ghost'
+                                            booking.status === 'Confirmed' ? 'badge-success' : 'badge-ghost'
                                             }`}>
                                             {booking.status}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div className="flex gap-2 items-center">
+                                            <Link href={`/services/${booking.serviceId}`} className="btn btn-ghost btn-xs">
+                                                View Details
+                                            </Link>
+                                            {booking.status === 'Pending' && (
+                                                <CancelBookingButton bookingId={booking._id} />
+                                            )}
                                         </div>
                                     </td>
                                 </tr>

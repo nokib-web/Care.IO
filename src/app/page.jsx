@@ -1,12 +1,15 @@
 import Banner from "@/components/home/Banner";
-import Image from "next/image";
+import About from "@/components/home/About";
+import ServicesOverview from "@/components/home/ServicesOverview";
+import Testimonials from "@/components/home/Testimonials";
 
 export default function Home() {
   return (
-    <div >
-      <section>
-        <Banner></Banner>
-      </section>
+    <div className="flex flex-col gap-0">
+      <Banner />
+      <About />
+      <ServicesOverview />
+      <Testimonials />
     </div>
   );
 }

@@ -10,9 +10,21 @@ const BookingForm = ({ service, user }) => {
     const [duration, setDuration] = useState(1);
     const [division, setDivision] = useState("");
     const [district, setDistrict] = useState("");
+    const [city, setCity] = useState("");
+    const [area, setArea] = useState("");
 
     // Calculate total cost dynamically
     const totalCost = (service.price.amount * duration).toFixed(2);
+
+    // Get available districts based on division
+    const availableDistricts = serviceCenterData.filter(item => item.region === division);
+
+    // Get available areas/city based on district
+    // Assuming 1 entry per district in JSON for simplicity based on previous view, 
+    // but filter returns array, so we take the first match or map.
+    const selectedLocationData = serviceCenterData.find(item => item.district === district);
+
+
 
     const handleSubmit = async (formData) => {
         // Append calculated/hidden values if not directly in inputs, 
@@ -38,6 +50,11 @@ const BookingForm = ({ service, user }) => {
                     <input type="hidden" name="serviceId" value={service._id} />
                     <input type="hidden" name="serviceName" value={service.serviceName} />
                     <input type="hidden" name="priceAmount" value={service.price.amount} />
+
+                    {/* Explicitly passing city and area as hidden if they are state-controlled but need to be in formData 
+                        OR ensuring they are in select/inputs with names. 
+                        Since 'city' might be read-only/auto-set, we can make it a readonly input.
+                    */}
 
                     {/* User Info Read-only */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -79,7 +96,12 @@ const BookingForm = ({ service, user }) => {
                                 name="division"
                                 className="select select-bordered"
                                 required
-                                onChange={(e) => setDivision(e.target.value)}
+                                onChange={(e) => {
+                                    setDivision(e.target.value);
+                                    setDistrict("");
+                                    setCity("");
+                                    setArea("");
+                                }}
                                 value={division}
                             >
                                 <option disabled value="">Select Division</option>
@@ -96,22 +118,57 @@ const BookingForm = ({ service, user }) => {
                                 required
                                 disabled={!division}
                                 value={district}
-                                onChange={(e) => setDistrict(e.target.value)}
+                                onChange={(e) => {
+                                    const newDistrict = e.target.value;
+                                    setDistrict(newDistrict);
+                                    setArea("");
+                                    const loc = serviceCenterData.find(item => item.district === newDistrict);
+                                    if (loc) setCity(loc.city);
+                                    else setCity("");
+                                }}
                             >
                                 <option disabled value="">Select District</option>
-                                {serviceCenterData
-                                    .filter(item => item.region === division)
-                                    .map(item => (
-                                        <option key={item.district} value={item.district}>{item.district}</option>
-                                    ))
+                                {availableDistricts.map(item => (
+                                    <option key={item.district} value={item.district}>{item.district}</option>
+                                ))
                                 }
                             </select>
                         </div>
                     </div>
 
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="form-control">
+                            <label className="label"><span className="label-text">City</span></label>
+                            <input
+                                name="city"
+                                type="text"
+                                className="input input-bordered"
+                                value={city}
+                                readOnly
+                                placeholder="Auto-selected"
+                            />
+                        </div>
+                        <div className="form-control">
+                            <label className="label"><span className="label-text">Area</span></label>
+                            <select
+                                name="area"
+                                className="select select-bordered"
+                                required
+                                disabled={!district}
+                                value={area}
+                                onChange={(e) => setArea(e.target.value)}
+                            >
+                                <option disabled value="">Select Area</option>
+                                {selectedLocationData?.covered_area?.map(areaName => (
+                                    <option key={areaName} value={areaName}>{areaName}</option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+
                     <div className="form-control">
-                        <label className="label"><span className="label-text">Address</span></label> <br />
-                        <textarea name="address" placeholder="Full Address" className="textarea textarea-bordered h-24" required></textarea>
+                        <label className="label"><span className="label-text">Exact Address</span></label> <br />
+                        <textarea name="address" placeholder="House no, Road no, etc." className="textarea textarea-bordered h-24" required></textarea>
                     </div>
 
                     {/* Summary */}

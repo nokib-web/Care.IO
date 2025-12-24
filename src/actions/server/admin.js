@@ -1,7 +1,8 @@
 "use server";
 
 import { dbconnect } from "@/lib/dbconnect";
-import { getSession } from "./auth";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import { ObjectId } from "mongodb";
 
 /**
@@ -11,7 +12,7 @@ import { ObjectId } from "mongodb";
 export const getPaymentHistory = async () => {
     // Ideally, check for admin role here. 
     // For now, we'll check session existence, but in a real app, strict role checks are needed.
-    const session = await getSession();
+    const session = await getServerSession(authOptions);
     if (!session) return [];
 
     try {
@@ -40,7 +41,7 @@ export const getPaymentHistory = async () => {
  * Calculates aggregate statistics for the admin dashboard.
  */
 export const getAdminStats = async () => {
-    const session = await getSession();
+    const session = await getServerSession(authOptions);
     if (!session) return { totalRevenue: 0, totalBookings: 0, totalUsers: 0 };
 
     try {

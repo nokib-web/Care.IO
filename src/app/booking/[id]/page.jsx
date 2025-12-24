@@ -1,5 +1,6 @@
 import { getServiceById } from "@/actions/server/services";
-import { getSession } from "@/actions/server/auth";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import BookingForm from "./BookingForm";
 import { redirect } from "next/navigation";
 
@@ -11,7 +12,7 @@ export async function generateMetadata({ params }) {
 }
 
 const BookingPage = async ({ params }) => {
-    const session = await getSession();
+    const session = await getServerSession(authOptions);
     if (!session) {
         redirect("/login");
     }
@@ -25,7 +26,7 @@ const BookingPage = async ({ params }) => {
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <BookingForm service={service} user={session} />
+            <BookingForm service={service} user={session.user} />
         </div>
     );
 };

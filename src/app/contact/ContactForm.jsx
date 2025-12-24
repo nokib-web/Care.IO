@@ -69,7 +69,7 @@ const ContactForm = () => {
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text font-semibold text-base-content/80">Message</span>
-                            </label>
+                            </label> <br />
                             <textarea
                                 className="textarea textarea-bordered h-32 bg-base-200/50 focus:bg-base-100 focus:border-primary transition-all duration-300"
                                 placeholder="Tell us more about your needs..."

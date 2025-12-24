@@ -12,7 +12,9 @@ const AllServicesPage = async () => {
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <h1 className="text-4xl font-bold text-center mb-8 text-primary">Our Services</h1>
+            <div className="mb-8 text-center">
+                <h1 className="text-4xl font-bold text-primary">Our Services</h1>
+            </div>
 
             {services.length === 0 ? (
                 <div className="text-center text-gray-500">No services available at the moment.</div>
@@ -35,9 +37,14 @@ const AllServicesPage = async () => {
                                     <span className="text-lg font-semibold text-secondary">
                                         ${service.price.amount}
                                     </span>
-                                    <Link href={`/booking/${service._id}`} className="btn btn-primary btn-sm">
-                                        Book Now
-                                    </Link>
+                                    <div className="flex gap-2">
+                                        <Link href={`/services/${service._id}`} className="btn btn-outline btn-sm">
+                                            View Details
+                                        </Link>
+                                        <Link href={`/booking/${service._id}`} className="btn btn-primary btn-sm">
+                                            Book Now
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
                         </div>
