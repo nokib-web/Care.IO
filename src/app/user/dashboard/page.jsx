@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import Link from "next/link";
 import React from "react";
+import PaymentButton from "@/components/buttons/PaymentButton";
 
 const UserDashboard = async () => {
     const session = await getServerSession(authOptions);
@@ -34,7 +35,7 @@ const UserDashboard = async () => {
                         <div className="card-body">
                             <h2 className="card-title text-xl mb-4 flex justify-between">
                                 <span>Active Bookings</span>
-                                <Link href="/my-bookings" className="text-sm font-normal text-primary hover:underline">
+                                <Link href="/user/bookings" className="text-sm font-normal text-primary hover:underline">
                                     View All
                                 </Link>
                             </h2>
@@ -67,9 +68,17 @@ const UserDashboard = async () => {
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <Link href={`/my-bookings`} className="btn btn-xs btn-ghost">
-                                                            Details
-                                                        </Link>
+                                                        <div className="flex gap-2">
+                                                            <Link href={`/user/bookings`} className="btn btn-xs btn-ghost">
+                                                                Details
+                                                            </Link>
+                                                            {booking.paymentStatus === 'Unpaid' && booking.status !== 'Cancelled' && (
+                                                                <PaymentButton bookingId={booking._id} />
+                                                            )}
+                                                            {booking.paymentStatus === 'Paid' && (
+                                                                <span className="badge badge-success badge-sm">Paid</span>
+                                                            )}
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             ))}

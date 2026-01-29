@@ -1,12 +1,12 @@
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layouts/Navbar";
+import ChatWidget from "@/components/chat/ChatWidget";
+import AuthProvider from "@/lib/AuthProvider"; // Assuming this exists or creates one
 
 export const dynamic = 'force-dynamic';
 
 import Footer from "@/components/layouts/Footer";
-
-
 
 const poppins = Poppins({
   weight: ["100", "200", "400", "700", "800"],
@@ -49,17 +49,20 @@ export default function RootLayout({ children }) {
       <body
         className={`${poppins.className} antialiased`}
       >
-        <main className="max-w-7xl mx-auto px-2">
-          <header>
-            <Navbar />
-          </header>
-          <section className="min-h-[calc(100vh-290px)]">
-            {children}
-          </section>
-          <footer>
-            <Footer />
-          </footer>
-        </main>
+        <AuthProvider>
+          <main className="max-w-7xl mx-auto px-2 relative">
+            <header>
+              <Navbar />
+            </header>
+            <section className="min-h-[calc(100vh-290px)]">
+              {children}
+            </section>
+            <footer>
+              <Footer />
+            </footer>
+            <ChatWidget />
+          </main>
+        </AuthProvider>
       </body>
     </html>
   );

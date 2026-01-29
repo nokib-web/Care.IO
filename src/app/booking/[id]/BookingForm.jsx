@@ -34,7 +34,7 @@ const BookingForm = ({ service, user }) => {
         const result = await createBooking(formData);
 
         if (result.success) {
-            router.push("/my-bookings");
+            router.push("/user/bookings");
         } else {
             alert(result.message);
         }

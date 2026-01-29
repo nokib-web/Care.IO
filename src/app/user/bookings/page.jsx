@@ -1,6 +1,7 @@
 import { getUserBookings } from "@/actions/server/bookings";
 import Link from "next/link";
 import CancelBookingButton from "@/components/buttons/CancelBookingButton";
+import PaymentButton from "@/components/buttons/PaymentButton";
 
 const MyBookingsPage = async () => {
     const bookings = await getUserBookings();
@@ -61,6 +62,12 @@ const MyBookingsPage = async () => {
                                             <Link href={`/services/${booking.serviceId}`} className="btn btn-ghost btn-xs">
                                                 View Details
                                             </Link>
+                                            {(booking.paymentStatus === 'Unpaid' || !booking.paymentStatus) && booking.status !== 'Cancelled' && (
+                                                <PaymentButton bookingId={booking._id} />
+                                            )}
+                                            {booking.paymentStatus === 'Paid' && (
+                                                <span className="badge badge-success badge-sm">Paid</span>
+                                            )}
                                             {booking.status === 'Pending' && (
                                                 <CancelBookingButton bookingId={booking._id} />
                                             )}
