@@ -48,6 +48,7 @@ export const createBooking = async (formData) => {
         bookingDate: new Date(date),
         status: "Pending",
         createdAt: new Date(),
+        paymentStatus: "Unpaid",
     };
 
     try {
@@ -73,7 +74,7 @@ export const createBooking = async (formData) => {
             // We don't fail the booking if email fails, just log it.
         }
 
-        revalidatePath("/my-bookings");
+        revalidatePath("/user/bookings");
         return { success: true, message: "Booking confirmed! Invoice sent to your email." };
     } catch (error) {
         console.error("Booking Error:", error);
@@ -125,7 +126,7 @@ export const cancelBooking = async (bookingId) => {
             return { success: false, message: "Booking not found or already cancelled." };
         }
 
-        revalidatePath("/my-bookings");
+        revalidatePath("/user/bookings");
         return { success: true, message: "Booking cancelled successfully." };
     } catch (error) {
         console.error("Cancel Booking Error:", error);
